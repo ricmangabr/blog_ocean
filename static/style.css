@@ -4,7 +4,7 @@ html{
     padding: lrem;
 }
 body{
-    max-width: 400px;
+    max-width: 800px;
     margin: 0 auto;
     background: white;
 }
@@ -20,7 +20,7 @@ hr{
 .content{
     padding: 0 1rem 1 rem;
 }
-.post > header> div: first-of-type{
+.post > header> div:first-of-type{
     flex: auto;
 }
 .post .about{
@@ -29,4 +29,8 @@ hr{
 }
 .post .body{
     white-space: pre-line;
+}
+.no-posts{
+    font-style: italic;
+    color:gray;
 }

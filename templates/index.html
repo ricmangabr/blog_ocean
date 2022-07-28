@@ -6,7 +6,8 @@
         <header>
             <div>
                 <h1>{{ post.title }}</h1>
-                    <div class="about">by {{ post.author }} on {{ post.created.strftime('%d/%b/%Y') }}
+                    <div class="about">
+                        by {{ post.author.username }} on {{ post.created.strftime('%d/%b/%Y') }}
                 </div>
             </div>
         </header>
@@ -14,7 +15,9 @@
     </article>
         {% if not loop.last %}
                 <hr>
-            {% endif %}
+        {% endif %}
+{% else %}
+    <p class = "no-posts">Ops...nenhum post no momento!</p>
 {% endfor %}
 {% endblock %}
  
