@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, flash
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy #para banco de dados
-from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user# maneja e encripta login
+from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user, login_required # maneja e encripta login
 from werkzeug.security import check_password_hash, generate_password_hash #segurança do login
 from sqlalchemy.exc import IntegrityError
 
@@ -67,7 +67,7 @@ def register():
 
     return render_template('register.html')
 
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -88,3 +88,19 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/create', methods=["GET", "POST"])
+@login_required #só permite a visualização da página se o usuário estiver logado
+def create():
+    if request.method == "POST":
+        title = request.form['title']
+        body = request.form['body']
+        try:
+            post= Post(title=title, body=body, author=current_user)
+            db.session.add(post)
+            db.session.commit()
+            return redirect(url_for('index'))
+        except IntegrityError:
+            flash("Error on creating Post; try again later")
+
+    return render_template('create.html')
