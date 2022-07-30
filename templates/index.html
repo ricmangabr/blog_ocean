@@ -6,6 +6,7 @@
     <a class="action" href="{{ url_for('create') }}">New Post</a>
     {% endif %}
 {% endblock %}
+
 {% block content %}
 {% for post in posts %} 
     <article class="post">
@@ -23,7 +24,7 @@
                 <hr>
         {% endif %}
 {% else %}
-    <p class = "no-posts">Ops...nenhum post no momento!</p>
+    <p class = "no-posts">Ops...There are no posts to display!</p>
 {% endfor %}
 {% endblock %}
  

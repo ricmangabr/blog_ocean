@@ -7,7 +7,7 @@ from sqlalchemy.exc import IntegrityError
 import os
 
 app = Flask("hello")
-db_url = os.environ.get('DATABASE_URL') or 'sqlite:///app.db'
+db_url = os.environ.get('DATABASE_URL') or "sqlite:///app.db"
 app.config["SQLALCHEMY_DATABASE_URI"] =  db_url.replace('postgres', 'postgresql')  # é um link para compatibilizar o banco local com o heroku
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False   # melhora a performance das consultas ao banco de dados
 app.config["SECRET_KEY"] = "pudim"
@@ -82,8 +82,6 @@ def login():
             return redirect(url_for('login'))
         login_user(user)
         return redirect(url_for('index'))
-
-
     return render_template("login.html")
 
 @app.route('/logout')
@@ -104,5 +102,4 @@ def create():
             return redirect(url_for('index'))
         except IntegrityError:
             flash("Error on creating Post; try again later")
-
     return render_template('create.html')
