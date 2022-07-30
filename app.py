@@ -2,12 +2,12 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy #para banco de dados
 from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user, login_required # maneja e encripta login
-from werkzeug.security import check_password_hash, generate_password_hash #segurança do login
+from werkzeug.security import check_password_hash, generate_password_hash # segurança do login
 from sqlalchemy.exc import IntegrityError
 import os
 
 app = Flask("hello")
-db.url = os.environ.get('DATABASE_URL') or 'sqlite:///app.db"
+db_url = os.environ.get('DATABASE_URL') or 'sqlite:///app.db'
 app.config["SQLALCHEMY_DATABASE_URI"] =  db_url.replace('postgres', 'postgresql')  # é um link para compatibilizar o banco local com o heroku
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False   # melhora a performance das consultas ao banco de dados
 app.config["SECRET_KEY"] = "pudim"
